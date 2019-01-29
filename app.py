@@ -21,7 +21,8 @@ def divide():
     if form.validate_on_submit():
         url = form.url.data
         obj = FEMloader(url)
-        loc = obj.dl_location
+        # loc = obj.dl_location
+        loc = ''
 
     return render_template('base.html', link=loc, form=form)
 

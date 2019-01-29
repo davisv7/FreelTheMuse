@@ -38,7 +38,7 @@ class FEMloader:
             page_soup = make_soup(self.referer)
             self.download_link = page_soup.find('div', attrs={'class': 'card-body px-0'}).a['href']
             self.save_song()
-        self.make_zip()
+        # self.make_zip()
 
     def fix_string(self, string):
         return "".join(x for x in string.replace(' ', '_') if x.isalnum() or x == '_')
