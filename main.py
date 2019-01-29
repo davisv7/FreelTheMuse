@@ -45,7 +45,7 @@ class FEMloader:
 
     def save_song(self):
         song = requests.get(self.download_link, headers={'referer': self.referer})
-        with open(f'{join(self.dl_location,self.fix_string(self.title))}.mp3', 'wb') as f:
+        with open(join(self.dl_location,self.fix_string(self.title))+'.mp3', 'wb') as f:
             f.write(song.content)
         print(f'downloaded {self.title}, sleeping 3 seconds')
         time.sleep(3)
