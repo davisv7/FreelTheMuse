@@ -36,7 +36,9 @@ class FEMloader:
             pre_soup = make_soup(pre_link)
             self.referer = pre_soup.find('a', attrs={'class': 'text-danger'})['href']
             page_soup = make_soup(self.referer)
-            self.download_link = page_soup.find('div', attrs={'class': 'card-body px-0'}).a['href']
+            self.download_link = \
+                page_soup.find('a', attrs={'class': 'btn btn-outline-success text-uppercase mt-3 font-weight-bold db'})[
+                    'href']
             self.save_song()
         # self.make_zip()
 
@@ -45,9 +47,9 @@ class FEMloader:
 
     def save_song(self):
         song = requests.get(self.download_link, headers={'referer': self.referer})
-        with open(join(self.dl_location,self.fix_string(self.title))+'.mp3', 'wb') as f:
+        with open(join(self.dl_location, self.fix_string(self.title)) + '.mp3', 'wb') as f:
             f.write(song.content)
-        print('downloaded',self.title, 'sleeping 3 seconds')
+        print('downloaded', self.title, 'sleeping 3 seconds')
         time.sleep(3)
 
     def make_zip(self):
@@ -59,3 +61,7 @@ def make_soup(link):
         soup = bs(webobj.content, "html.parser")
     time.sleep(1)
     return soup
+
+
+if __name__ == '__main__':
+    FEMloader("https://freeallmusic.top/album/8017-2305-0782")
