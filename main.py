@@ -32,7 +32,7 @@ class FEMloader:
         for item in titles_links:
             anchor = item.find('a')
             self.title, pre_link = anchor.text, anchor['href']
-            print(self.fix_string(self.title)))
+            print(self.fix_string(self.title))
             pre_soup = make_soup(pre_link)
             self.referer = pre_soup.find('a', attrs={'class': 'text-danger'})['href']
             page_soup = make_soup(self.referer)
@@ -49,7 +49,7 @@ class FEMloader:
         song = requests.get(self.download_link, headers={'referer': self.referer})
         with open(join(self.dl_location, self.fix_string(self.title)) + '.mp3', 'wb') as f:
             f.write(song.content)
-        print('downloaded', self.fix_string(self.title)), 'sleeping 3 seconds')
+        print('downloaded', self.fix_string(self.title), 'sleeping 3 seconds')
         time.sleep(3)
 
     def make_zip(self):
