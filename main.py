@@ -18,7 +18,7 @@ class FEMloader:
         self.artist = self.fix_string(first_soup.find('a', attrs={'class': 'item-author _600'}).next.text)
         print(self.artist)
         self.album = self.fix_string(sub('[\ \n]{2,}', '', first_soup.find('h4', attrs={'class': 'inline'}).text))
-        print(self.album)
+        print(self.fix_string(self.album))
         cwd = getcwd()
         self.dl_location = join(cwd, 'albums', self.artist, self.album)
         self.zip_location = join(cwd, 'zips')
@@ -32,7 +32,7 @@ class FEMloader:
         for item in titles_links:
             anchor = item.find('a')
             self.title, pre_link = anchor.text, anchor['href']
-            print(self.title)
+            print(self.fix_string(self.title)))
             pre_soup = make_soup(pre_link)
             self.referer = pre_soup.find('a', attrs={'class': 'text-danger'})['href']
             page_soup = make_soup(self.referer)
@@ -49,7 +49,7 @@ class FEMloader:
         song = requests.get(self.download_link, headers={'referer': self.referer})
         with open(join(self.dl_location, self.fix_string(self.title)) + '.mp3', 'wb') as f:
             f.write(song.content)
-        print('downloaded', self.title, 'sleeping 3 seconds')
+        print('downloaded', self.fix_string(self.title)), 'sleeping 3 seconds')
         time.sleep(3)
 
     def make_zip(self):
